@@ -46,17 +46,17 @@ docker images
 
 docker search tomcat
 docker pull tomcat
-docker run -it -p 1234:8080 tomcat
-docker run -it -p 8888:80 nginx
-docker run -d -p 8888:80 nginx
+docker run -it --restart unless-stopped -p 1234:8080 tomcat
+docker run -it --restart unless-stopped -p 8888:80 nginx
+docker run -d --restart unless-stopped -p 8888:80 nginx
 
 
 
 docker build -t denis .
 docker images
 
-docker run -it  -p 1234:80  denis:latest
-docker run -d -p  1234:80  denis:latest
+docker run -it --restart unless-stopped -p 1234:80  denis:latest
+docker run -d --restart unless-stopped -p  1234:80  denis:latest
 
 docker  ps     # list containers
 docker  ps -a  # list all containers
@@ -69,7 +69,7 @@ docker rmi  # delete image
 
 UPDATE IMAGE
 ~~~~~~~~~~~~~
-docker run -d -p 7777:80 denis_ubuntu4
+docker run -d --restart unless-stopped -p 7777:80 denis_ubuntu4
 docker exec -it 5267e21d140 /bin/bash
 echo "V2" >> /var/www/html/index.html
 exit
